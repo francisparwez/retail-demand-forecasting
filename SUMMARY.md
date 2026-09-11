@@ -59,11 +59,36 @@ Observed holiday and event dates have different average sales behavior from othe
 
 These findings will guide the temporal feature engineering and forecasting models in the next stages.
 
+### Part 02 — Temporal Feature Engineering & Leakage Prevention
+
+**Status:** ✅ Complete
+
+The second stage transformed the daily sales series into forecasting features using historical information only.
+
+The engineered features include:
+
+- lag features for 1, 7, 14, and 28 days
+- rolling means for 7, 14, and 28 days
+- rolling standard deviations for 7, 14, and 28 days
+- calendar features
+- weekly Fourier terms
+- annual Fourier terms
+- holiday and event indicators
+- promotion indicators
+
+Rolling features were calculated after shifting the sales series by one day to prevent the current day's sales from being included in its own features.
+
+The feature table uses a continuous calendar index so that lag periods represent actual calendar days.
+
+Leakage checks confirmed that the lag and rolling features use only previous sales observations.
+
+The engineered dataset will be used in the later forecasting and model comparison stages.
+
 ## Current Project Status
 
-**Part 01 completed.**
+**Part 02 completed.**
 
-The next stage will focus on temporal feature engineering and strict prevention of future data leakage.
+The next stage will focus on building the statistical forecasting model.
 
 ## Project Files
 
@@ -92,11 +117,15 @@ The next stage will focus on temporal feature engineering and strict prevention 
 - `images/7_stl_annual.png`
 - `images/8_acf_daily_sales.png`
 - `images/9_pacf_daily_sales.png`
+- `images/10_lag_feature_example.png`
+- `images/11_rolling_features.png`
+- `images/12_fourier_features.png`
+- `images/13_feature_correlation.png`
 
 ## Planned Stages
 
 1. Time Series EDA — Complete
-2. Temporal Feature Engineering & Leakage Prevention
+2. Temporal Feature Engineering & Leakage Prevention — Complete
 3. Statistical Forecasting
 4. Prophet Forecasting
 5. XGBoost Forecasting

@@ -102,12 +102,51 @@ Observed holiday and event dates also show different average sales behavior from
 
 ![PACF of Daily Sales](images/9_pacf_daily_sales.png)
 
+## Part 02 — Temporal Feature Engineering & Leakage Prevention
+
+### Status
+
+✅ Complete
+
+The second stage converts the historical daily sales series into forecasting features while making sure that future sales information is never used when creating historical features.
+
+The features created include:
+
+- lag features for 1, 7, 14, and 28 days
+- 7-, 14-, and 28-day rolling means
+- 7-, 14-, and 28-day rolling standard deviations
+- calendar features
+- weekly Fourier terms
+- annual Fourier terms
+- holiday and event indicators
+- promotion indicators
+
+The rolling calculations use the previous observations only. Each rolling feature is created after shifting the sales series by one day, which prevents the current day's sales from leaking into its own features.
+
+The feature engineering also uses a continuous calendar index so that a lag of 7 represents seven calendar days rather than seven observed rows.
+
+### Leakage Check
+
+Lag and rolling features were checked directly against their expected previous-value calculations.
+
+The final feature table does not use future target values to construct historical training features.
+
+### Visualizations
+
+![Lag Feature Example](images/10_lag_feature_example.png)
+
+![Rolling Features](images/11_rolling_features.png)
+
+![Fourier Features](images/12_fourier_features.png)
+
+![Feature Correlation](images/13_feature_correlation.png)
+
 ## Project Progress
 
 | Part | Stage                                              | Status      |
 | ---- | -------------------------------------------------- | ----------- |
 | 01   | Time Series EDA                                    | ✅ Complete |
-| 02   | Temporal Feature Engineering & Leakage Prevention  | Planned     |
+| 02   | Temporal Feature Engineering & Leakage Prevention  | ✅ Complete |
 | 03   | Statistical Forecasting                            | Planned     |
 | 04   | Prophet Forecasting                                | Planned     |
 | 05   | XGBoost Forecasting                                | Planned     |
@@ -139,7 +178,11 @@ retail-demand-forecasting/
 │   ├── 6_stl_weekly.png
 │   ├── 7_stl_annual.png
 │   ├── 8_acf_daily_sales.png
-│   └── 9_pacf_daily_sales.png
+│   ├── 9_pacf_daily_sales.png
+│   ├── 10_lag_feature_example.png
+│   ├── 11_rolling_features.png
+│   ├── 12_fourier_features.png
+│   └── 13_feature_correlation.png
 ├── reports/
 ├── .gitignore
 ├── README.md
