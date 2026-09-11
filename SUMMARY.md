@@ -88,7 +88,31 @@ The engineered dataset will be used in the later forecasting and model compariso
 
 **Part 02 completed.**
 
-The next stage will focus on building the statistical forecasting model.
+### Part 03 — Forecasting Model Implementation & Tuning
+
+**Status:** ✅ Complete
+
+Three forecasting approaches were implemented and tuned:
+
+- SARIMA
+- Prophet
+- XGBoost
+
+SARIMA was configured with a 7-day seasonal period to capture weekly demand patterns.
+
+Prophet was configured with weekly and yearly seasonality and tuned using a chronological validation search.
+
+XGBoost was trained using the temporal features created in Part 02 and tuned using chronological TimeSeriesSplit folds.
+
+The preliminary tuning stage did not use the final test period.
+
+The next stage will perform formal rolling-origin cross-validation so that the three models can be compared using the same time-series validation process.
+
+## Current Project Status
+
+**Part 03 completed.**
+
+The next stage will focus on rolling-origin cross-validation and formal comparison of the forecasting models.
 
 ## Project Files
 
@@ -121,14 +145,18 @@ The next stage will focus on building the statistical forecasting model.
 - `images/11_rolling_features.png`
 - `images/12_fourier_features.png`
 - `images/13_feature_correlation.png`
+- `images/14_sarima_validation_forecast.png`
+- `images/15_prophet_validation_forecast.png`
+- `images/16_xgboost_validation_forecast.png`
+- `images/17_xgboost_feature_importance.png`
 
 ## Planned Stages
 
 1. Time Series EDA — Complete
 2. Temporal Feature Engineering & Leakage Prevention — Complete
-3. Statistical Forecasting
-4. Prophet Forecasting
-5. XGBoost Forecasting
-6. Rolling-Origin Cross-Validation & Model Comparison
-7. Final 16-Day Forecast
+3. Forecasting Model Implementation & Tuning — Complete
+4. Rolling-Origin Cross-Validation
+5. Model Comparison & Selection
+6. Final 16-Day Forecast
+7. Prediction Intervals & Error Analysis
 8. Business Reporting

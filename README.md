@@ -141,18 +141,68 @@ The final feature table does not use future target values to construct historica
 
 ![Feature Correlation](images/13_feature_correlation.png)
 
+## Part 03 — Forecasting Model Implementation & Tuning
+
+### Status
+
+✅ Complete
+
+Three forecasting approaches were implemented and tuned:
+
+- SARIMA
+- Prophet
+- XGBoost
+
+### SARIMA
+
+SARIMA was used as the statistical forecasting approach with a seasonal period of 7 days to capture the weekly pattern identified during the EDA.
+
+A small parameter search was used to select the strongest configuration based on AIC.
+
+### Prophet
+
+Prophet was configured with weekly and yearly seasonality.
+
+The model was tuned using a chronological validation search over trend and seasonality parameters.
+
+### XGBoost
+
+XGBoost was trained as a regression model using the temporal features created in Part 02.
+
+The model used lag features, rolling statistics, calendar variables, Fourier terms, holiday and event indicators, and promotion information.
+
+XGBoost hyperparameters were tuned using chronological `TimeSeriesSplit` folds without shuffling.
+
+### Model Evaluation
+
+The preliminary validation results are used to confirm that the models are working and to support tuning.
+
+The final comparison of SARIMA, Prophet, and XGBoost will be performed using rolling-origin cross-validation in the next stage.
+
+The test dataset remains untouched.
+
+### Visualizations
+
+![SARIMA Validation Forecast](images/14_sarima_validation_forecast.png)
+
+![Prophet Validation Forecast](images/15_prophet_validation_forecast.png)
+
+![XGBoost Validation Forecast](images/16_xgboost_validation_forecast.png)
+
+![XGBoost Feature Importance](images/17_xgboost_feature_importance.png)
+
 ## Project Progress
 
-| Part | Stage                                              | Status      |
-| ---- | -------------------------------------------------- | ----------- |
-| 01   | Time Series EDA                                    | ✅ Complete |
-| 02   | Temporal Feature Engineering & Leakage Prevention  | ✅ Complete |
-| 03   | Statistical Forecasting                            | Planned     |
-| 04   | Prophet Forecasting                                | Planned     |
-| 05   | XGBoost Forecasting                                | Planned     |
-| 06   | Rolling-Origin Cross-Validation & Model Comparison | Planned     |
-| 07   | Final 16-Day Forecast                              | Planned     |
-| 08   | Business Reporting                                 | Planned     |
+| Part | Stage                                             | Status      |
+| ---- | ------------------------------------------------- | ----------- |
+| 01   | Time Series EDA                                   | ✅ Complete |
+| 02   | Temporal Feature Engineering & Leakage Prevention | ✅ Complete |
+| 03   | Forecasting Model Implementation & Tuning         | ✅ Complete |
+| 04   | Rolling-Origin Cross-Validation                   | Planned     |
+| 05   | Model Comparison & Selection                      | Planned     |
+| 06   | Final 16-Day Forecast                             | Planned     |
+| 07   | Prediction Intervals & Error Analysis             | Planned     |
+| 08   | Business Reporting                                | Planned     |
 
 ## Project Structure
 
@@ -182,8 +232,11 @@ retail-demand-forecasting/
 │   ├── 10_lag_feature_example.png
 │   ├── 11_rolling_features.png
 │   ├── 12_fourier_features.png
-│   └── 13_feature_correlation.png
-├── reports/
+│   ├── 13_feature_correlation.png
+│   ├── 14_sarima_validation_forecast.png
+│   ├── 15_prophet_validation_forecast.png
+│   ├── 16_xgboost_validation_forecast.png
+│   └── 17_xgboost_feature_importance.png
 ├── .gitignore
 ├── README.md
 ├── SUMMARY.md
