@@ -84,10 +84,6 @@ Leakage checks confirmed that the lag and rolling features use only previous sal
 
 The engineered dataset will be used in the later forecasting and model comparison stages.
 
-## Current Project Status
-
-**Part 02 completed.**
-
 ### Part 03 — Forecasting Model Implementation & Tuning
 
 **Status:** ✅ Complete
@@ -108,11 +104,35 @@ The preliminary tuning stage did not use the final test period.
 
 The next stage will perform formal rolling-origin cross-validation so that the three models can be compared using the same time-series validation process.
 
+### Part 04 — Rolling-Origin Cross-Validation
+
+**Status:** ✅ Complete
+
+Three expanding-window validation folds of 28 days each were used.
+
+Model tuning was completed on an earlier historical period that ended before the first rolling-origin validation fold.
+
+SARIMA and Prophet were fitted only on historical observations available before each validation period.
+
+XGBoost validation forecasts were generated recursively so actual future validation sales were not used to create lag or rolling features.
+
+The models were evaluated using RMSE, MAE, and MAPE.
+
+The final mean cross-validation results were:
+
+- XGBoost — RMSE: 68419.94, MAE: 52306.91, MAPE: 5.95%
+- SARIMA — RMSE: 86348.65, MAE: 62350.61, MAPE: 6.99%
+- Prophet — RMSE: 98565.13, MAE: 79710.42, MAPE: 9.56%
+
+XGBoost achieved the strongest average performance across all three metrics.
+
+No shuffling was used and the final test period remained untouched.
+
 ## Current Project Status
 
-**Part 03 completed.**
+**Part 04 completed.**
 
-The next stage will focus on rolling-origin cross-validation and formal comparison of the forecasting models.
+The next stage will focus on final model selection and the 16-day forecast.
 
 ## Project Files
 
@@ -149,13 +169,18 @@ The next stage will focus on rolling-origin cross-validation and formal comparis
 - `images/15_prophet_validation_forecast.png`
 - `images/16_xgboost_validation_forecast.png`
 - `images/17_xgboost_feature_importance.png`
+- `images/18_cv_rmse_by_fold.png`
+- `images/19_cv_mae_by_fold.png`
+- `images/20_cv_mape_by_fold.png`
+- `images/21_cv_model_comparison.png`
+- `images/22_final_cv_fold_forecasts.png`
 
 ## Planned Stages
 
 1. Time Series EDA — Complete
 2. Temporal Feature Engineering & Leakage Prevention — Complete
 3. Forecasting Model Implementation & Tuning — Complete
-4. Rolling-Origin Cross-Validation
+4. Rolling-Origin Cross-Validation — Complete
 5. Model Comparison & Selection
 6. Final 16-Day Forecast
 7. Prediction Intervals & Error Analysis

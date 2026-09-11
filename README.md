@@ -191,6 +191,50 @@ The test dataset remains untouched.
 
 ![XGBoost Feature Importance](images/17_xgboost_feature_importance.png)
 
+## Part 04 — Rolling-Origin Cross-Validation
+
+### Status
+
+✅ Complete
+
+The three tuned forecasting models were evaluated using expanding-window rolling-origin cross-validation.
+
+An earlier historical period was used for model tuning, ending before the first rolling-origin validation fold. This kept the validation periods separate from hyperparameter selection.
+
+Three chronological validation folds were used, with each fold covering 28 consecutive days.
+
+The training window expanded through time, and no random shuffling was used.
+
+SARIMA and Prophet were fitted using only historical observations available before each validation period.
+
+XGBoost validation forecasts were generated recursively so that actual future validation sales were never used to create lag or rolling features.
+
+The models were evaluated using RMSE, MAE, and MAPE.
+
+### Cross-Validation Results
+
+| Model   | Mean RMSE | Mean MAE | Mean MAPE |
+| ------- | --------: | -------: | --------: |
+| XGBoost |  68419.94 | 52306.91 |     5.95% |
+| SARIMA  |  86348.65 | 62350.61 |     6.99% |
+| Prophet |  98565.13 | 79710.42 |     9.56% |
+
+XGBoost achieved the lowest mean RMSE, MAE, and MAPE across the rolling-origin validation folds.
+
+The final test dataset was not used during cross-validation.
+
+### Cross-Validation Visualizations
+
+![RMSE Across Rolling Validation Folds](images/18_cv_rmse_by_fold.png)
+
+![MAE Across Rolling Validation Folds](images/19_cv_mae_by_fold.png)
+
+![MAPE Across Rolling Validation Folds](images/20_cv_mape_by_fold.png)
+
+![Mean Rolling-Origin Model Comparison](images/21_cv_model_comparison.png)
+
+![Final Rolling-Origin Validation Fold](images/22_final_cv_fold_forecasts.png)
+
 ## Project Progress
 
 | Part | Stage                                             | Status      |
@@ -198,7 +242,7 @@ The test dataset remains untouched.
 | 01   | Time Series EDA                                   | ✅ Complete |
 | 02   | Temporal Feature Engineering & Leakage Prevention | ✅ Complete |
 | 03   | Forecasting Model Implementation & Tuning         | ✅ Complete |
-| 04   | Rolling-Origin Cross-Validation                   | Planned     |
+| 04   | Rolling-Origin Cross-Validation                   | ✅ Complete |
 | 05   | Model Comparison & Selection                      | Planned     |
 | 06   | Final 16-Day Forecast                             | Planned     |
 | 07   | Prediction Intervals & Error Analysis             | Planned     |
@@ -236,7 +280,12 @@ retail-demand-forecasting/
 │   ├── 14_sarima_validation_forecast.png
 │   ├── 15_prophet_validation_forecast.png
 │   ├── 16_xgboost_validation_forecast.png
-│   └── 17_xgboost_feature_importance.png
+│   ├── 17_xgboost_feature_importance.png
+│   ├── 18_cv_rmse_by_fold.png
+│   ├── 19_cv_mae_by_fold.png
+│   ├── 20_cv_mape_by_fold.png
+│   ├── 21_cv_model_comparison.png
+│   └── 22_final_cv_fold_forecasts.png
 ├── .gitignore
 ├── README.md
 ├── SUMMARY.md
