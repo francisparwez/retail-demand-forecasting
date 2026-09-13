@@ -128,11 +128,40 @@ XGBoost achieved the strongest average performance across all three metrics.
 
 No shuffling was used and the final test period remained untouched.
 
-## Current Project Status
+## Part 05 — Final Model Selection, Forecast & Business Report
 
-**Part 04 completed.**
+**Status:** ✅ Complete
 
-The next stage will focus on final model selection and the 16-day forecast.
+XGBoost was selected based on the rolling-origin results because it achieved the lowest mean RMSE, MAE, and MAPE.
+
+The final XGBoost model was retrained on all historical modelling data through 2017-08-15.
+
+The final 16-day forecast covers 2017-08-16 to 2017-08-31.
+
+The total forecast is approximately 12.64 million units, with an average daily forecast of approximately 789,772 units.
+
+The lowest daily forecast is approximately 660,865 units, while the highest is approximately 994,186 units.
+
+Approximate 95% prediction intervals were generated using a residual bootstrap based on XGBoost rolling-origin forecast errors.
+
+The recommended deployment model is XGBoost because it produced the strongest average forecasting performance and can use temporal, calendar, holiday, and promotion information together.
+
+The forecast can support inventory planning, replenishment, staffing, distribution capacity, and promotion preparation.
+
+## Final Project Status
+
+**All project requirements are complete.**
+
+The final project includes:
+
+1. Time Series EDA
+2. Temporal Feature Engineering & Leakage Prevention
+3. Three Forecasting Models and Tuning
+4. Rolling-Origin Cross-Validation
+5. Model Evaluation and Selection
+6. Final 16-Day Forecast
+7. Prediction Intervals
+8. Business Recommendation and Operational Implications
 
 ## Project Files
 
@@ -174,14 +203,19 @@ The next stage will focus on final model selection and the 16-day forecast.
 - `images/20_cv_mape_by_fold.png`
 - `images/21_cv_model_comparison.png`
 - `images/22_final_cv_fold_forecasts.png`
+- `images/23_final_16_day_forecast.png`
 
-## Planned Stages
+## Final Status
 
-1. Time Series EDA — Complete
-2. Temporal Feature Engineering & Leakage Prevention — Complete
-3. Forecasting Model Implementation & Tuning — Complete
-4. Rolling-Origin Cross-Validation — Complete
-5. Model Comparison & Selection
+**All project requirements are complete.**
+
+The final project includes:
+
+1. Time Series EDA
+2. Temporal Feature Engineering & Leakage Prevention
+3. Three Forecasting Models and Tuning
+4. Rolling-Origin Cross-Validation
+5. Model Evaluation and Selection
 6. Final 16-Day Forecast
-7. Prediction Intervals & Error Analysis
-8. Business Reporting
+7. Prediction Intervals
+8. Business Recommendation and Operational Implications

@@ -235,18 +235,66 @@ The final test dataset was not used during cross-validation.
 
 ![Final Rolling-Origin Validation Fold](images/22_final_cv_fold_forecasts.png)
 
-## Project Progress
+## Part 05 — Final Model Selection, 16-Day Forecast & Business Report
 
-| Part | Stage                                             | Status      |
-| ---- | ------------------------------------------------- | ----------- |
-| 01   | Time Series EDA                                   | ✅ Complete |
-| 02   | Temporal Feature Engineering & Leakage Prevention | ✅ Complete |
-| 03   | Forecasting Model Implementation & Tuning         | ✅ Complete |
-| 04   | Rolling-Origin Cross-Validation                   | ✅ Complete |
-| 05   | Model Comparison & Selection                      | Planned     |
-| 06   | Final 16-Day Forecast                             | Planned     |
-| 07   | Prediction Intervals & Error Analysis             | Planned     |
-| 08   | Business Reporting                                | Planned     |
+### Status
+
+✅ Complete
+
+XGBoost was selected as the final model because it achieved the lowest mean RMSE, MAE, and MAPE across the rolling-origin validation folds.
+
+The final XGBoost model was retrained using all available historical modelling data through 2017-08-15.
+
+The final forecast covers 2017-08-16 to 2017-08-31.
+
+The model forecasts approximately 12.64 million units across the 16-day period, with an average daily forecast of approximately 789,772 units.
+
+The lowest daily forecast is approximately 660,865 units, while the highest is approximately 994,186 units.
+
+Approximate 95% prediction intervals were generated using a residual bootstrap based on the XGBoost rolling-origin forecast errors.
+
+### Business Recommendation
+
+XGBoost is the recommended model for this aggregate daily demand forecasting task.
+
+It achieved the strongest average performance across RMSE, MAE, and MAPE and can combine lagged demand, rolling demand patterns, calendar information, holidays, and promotion activity.
+
+The forecast can support short-term inventory planning, replenishment, staffing, distribution capacity, and preparation around promotional activity.
+
+The current model forecasts aggregate demand across the full dataset rather than individual stores or product families. A more granular operational system would require an additional store- and product-level forecasting layer.
+
+### Final Forecast
+
+![Final 16-Day Retail Demand Forecast](images/23_final_16_day_forecast.png)
+
+The complete daily forecast and prediction intervals are stored in `final_16_day_forecast.csv`.
+
+## Final Project Status
+
+✅ Complete
+
+The project now covers:
+
+- time series EDA
+- temporal feature engineering
+- leakage prevention
+- SARIMA
+- Prophet
+- XGBoost
+- rolling-origin cross-validation
+- RMSE, MAE, and MAPE evaluation
+- final 16-day forecast
+- prediction intervals
+- model recommendation
+- business and operational implications
+
+| Part | Stage                                                    | Status      |
+| ---- | -------------------------------------------------------- | ----------- |
+| 01   | Time Series EDA                                          | ✅ Complete |
+| 02   | Temporal Feature Engineering & Leakage Prevention        | ✅ Complete |
+| 03   | Forecasting Model Implementation & Tuning                | ✅ Complete |
+| 04   | Rolling-Origin Cross-Validation                          | ✅ Complete |
+| 05   | Final Model Selection, 16-Day Forecast & Business Report | ✅ Complete |
 
 ## Project Structure
 
@@ -285,7 +333,8 @@ retail-demand-forecasting/
 │   ├── 19_cv_mae_by_fold.png
 │   ├── 20_cv_mape_by_fold.png
 │   ├── 21_cv_model_comparison.png
-│   └── 22_final_cv_fold_forecasts.png
+│   ├── 22_final_cv_fold_forecasts.png
+│   └── 23_final_16_day_forecast.png
 ├── .gitignore
 ├── README.md
 ├── SUMMARY.md
